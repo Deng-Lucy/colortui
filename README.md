@@ -22,4 +22,8 @@ colortui-disable  # turn color off
 
 ## Uninstall
 
-Delete the `# colortui` block from `~/.zshrc`.
+```zsh
+colortui-uninstall
+```
+
+Then open a new terminal.

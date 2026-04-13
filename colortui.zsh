@@ -6,6 +6,11 @@ COLORTUI_ENABLED=${COLORTUI_ENABLED:-0}
 
 colortui-enable()  { COLORTUI_ENABLED=1; echo "colortui: enabled"  }
 colortui-disable() { COLORTUI_ENABLED=0; echo "colortui: disabled" }
+colortui-uninstall() {
+  local rc="${ZDOTDIR:-$HOME}/.zshrc"
+  sed -i '' '/^# colortui: per-terminal text color$/,/^# end colortui$/d' "$rc"
+  echo "colortui: removed from $rc — open a new terminal to finish"
+}
 
 claude() {
   local _tty _hash _idx
@@ -44,3 +49,4 @@ claude() {
 
   return $_ret
 }
+# end colortui

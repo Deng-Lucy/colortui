@@ -29,6 +29,7 @@ fi
 
 # Append to shell config
 printf '\n%s\n%s\n' "$MARKER" "$CONTENT" >> "$RC"
+# (end marker is embedded in colortui.zsh itself)
 
 echo "Installed! To apply now, run:"
 echo "  source $RC"
