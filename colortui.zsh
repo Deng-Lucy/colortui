@@ -11,16 +11,15 @@ claude() {
   local _tty _hash _idx
   _tty=$(tty 2>/dev/null || echo "tty$$")
   _hash=$(printf '%s' "$_tty" | cksum | awk '{print $1}')
-  _idx=$((_hash % 14))
+  _idx=$((_hash % 13))
 
   local -a _fg=(
     "rgb:DD/99/33"
     "rgb:22/99/22"
-    "rgb:99/88/00"
-    "rgb:55/88/EE"
+    "rgb:DD/77/55"
+    "rgb:88/EE/CC"
     "rgb:CC/66/CC"
-    "rgb:00/88/88"
-    "rgb:CC/77/00"
+    "rgb:EE/BB/88"
     "rgb:88/99/EE"
     "rgb:EE/EE/EE"
     "rgb:EE/AA/BB"
