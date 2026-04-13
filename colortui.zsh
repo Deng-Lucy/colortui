@@ -12,7 +12,7 @@ claude() {
     "rgb:DD/99/33"
     "rgb:22/99/22"
     "rgb:99/88/00"
-    "rgb:22/55/CC"
+    "rgb:55/88/EE"
     "rgb:CC/66/CC"
     "rgb:00/88/88"
     "rgb:CC/77/00"
