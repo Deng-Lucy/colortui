@@ -11,6 +11,15 @@ cd colortui && sh install.sh
 
 New terminals pick it up automatically. To apply to the current shell, run `source ~/.zshrc`.
 
+## Usage
+
+Color is **off by default**. Enable it for the current session:
+
+```zsh
+colortui-enable   # turn color on
+colortui-disable  # turn color off
+```
+
 ## Uninstall
 
 Delete the `# colortui` block from `~/.zshrc`.

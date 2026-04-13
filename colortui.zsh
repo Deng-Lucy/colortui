@@ -2,6 +2,11 @@
 # Assigns a unique text color to each terminal session via OSC 10.
 # Works in Terminal.app, VSCode, iTerm2, and most modern terminals.
 
+COLORTUI_ENABLED=${COLORTUI_ENABLED:-0}
+
+colortui-enable()  { COLORTUI_ENABLED=1; echo "colortui: enabled"  }
+colortui-disable() { COLORTUI_ENABLED=0; echo "colortui: disabled" }
+
 claude() {
   local _tty _hash _idx
   _tty=$(tty 2>/dev/null || echo "tty$$")
@@ -25,14 +30,18 @@ claude() {
     "rgb:CC/AA/EE"
   )
 
-  # Set foreground text color for the session
-  printf '\033]10;%s\007' "${_fg[$((_idx + 1))]}"
+  if [[ "$COLORTUI_ENABLED" == "1" ]]; then
+    # Set foreground text color for the session
+    printf '\033]10;%s\007' "${_fg[$((_idx + 1))]}"
+  fi
 
   command claude "$@"
   local _ret=$?
 
-  # Restore default foreground color on exit
-  printf '\033]110;\007'
+  if [[ "$COLORTUI_ENABLED" == "1" ]]; then
+    # Restore default foreground color on exit
+    printf '\033]110;\007'
+  fi
 
   return $_ret
 }
