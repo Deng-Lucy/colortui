@@ -31,5 +31,10 @@ fi
 printf '\n%s\n%s\n' "$MARKER" "$CONTENT" >> "$RC"
 # (end marker is embedded in colortui.zsh itself)
 
-echo "Installed! To apply now, run:"
+# Enable by default (persistent state file)
+_state="${XDG_CONFIG_HOME:-$HOME/.config}/colortui/enabled"
+mkdir -p "$(dirname "$_state")"
+touch "$_state"
+
+echo "Installed and enabled! To apply now, run:"
 echo "  source $RC"

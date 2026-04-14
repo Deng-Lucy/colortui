@@ -2,13 +2,25 @@
 # Assigns a unique text color to each terminal session via OSC 10.
 # Works in Terminal.app, VSCode, iTerm2, and most modern terminals.
 
-COLORTUI_ENABLED=${COLORTUI_ENABLED:-0}
+_COLORTUI_STATE="${XDG_CONFIG_HOME:-$HOME/.config}/colortui/enabled"
 
-colortui-enable()  { COLORTUI_ENABLED=1; echo "colortui: enabled"  }
-colortui-disable() { COLORTUI_ENABLED=0; echo "colortui: disabled" }
+_colortui_is_enabled() { [[ -f "$_COLORTUI_STATE" ]] }
+
+colortui-enable() {
+  mkdir -p "$(dirname "$_COLORTUI_STATE")"
+  touch "$_COLORTUI_STATE"
+  echo "colortui: enabled (persists across terminals)"
+}
+
+colortui-disable() {
+  rm -f "$_COLORTUI_STATE"
+  echo "colortui: disabled"
+}
+
 colortui-uninstall() {
   local rc="${ZDOTDIR:-$HOME}/.zshrc"
   sed -i '' '/^# colortui: per-terminal text color$/,/^# end colortui$/d' "$rc"
+  rm -f "$_COLORTUI_STATE"
   echo "colortui: removed from $rc — open a new terminal to finish"
 }
 
@@ -34,16 +46,14 @@ claude() {
     "rgb:CC/AA/EE"
   )
 
-  if [[ "$COLORTUI_ENABLED" == "1" ]]; then
-    # Set foreground text color for the session
+  if _colortui_is_enabled; then
     printf '\033]10;%s\007' "${_fg[$((_idx + 1))]}"
   fi
 
   command claude "$@"
   local _ret=$?
 
-  if [[ "$COLORTUI_ENABLED" == "1" ]]; then
-    # Restore default foreground color on exit
+  if _colortui_is_enabled; then
     printf '\033]110;\007'
   fi
 

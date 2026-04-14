@@ -9,11 +9,11 @@ git clone https://github.com/Deng-Lucy/colortui.git
 cd colortui && sh install.sh
 ```
 
-New terminals pick it up automatically. To apply to the current shell, run `source ~/.zshrc`.
+New terminals pick it up automatically. Color is **on by default**. To apply to the current shell, run `source ~/.zshrc`.
 
 ## Usage
 
-Color is **off by default**. Enable it for the current session:
+Enable or disable color — the setting persists across all terminals:
 
 ```zsh
 colortui-enable   # turn color on
