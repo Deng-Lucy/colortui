@@ -58,7 +58,7 @@ function claude {
     $idx = $hash % 13
 
     if (_colortui_is_enabled) {
-        [Console]::Write("`e]10;$($colors[$idx])`a")
+        [Console]::Write("$([char]27)]10;$($colors[$idx])`a")
     }
 
     $claudeCmd = Get-Command claude -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1
@@ -70,7 +70,7 @@ function claude {
     $ret = $LASTEXITCODE
 
     if (_colortui_is_enabled) {
-        [Console]::Write("`e]110;`a")
+        [Console]::Write("$([char]27)]110;`a")
     }
 
     return $ret
